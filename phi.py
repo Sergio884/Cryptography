@@ -1,4 +1,4 @@
-n = 127
+n = 33
 auxN = n
 llaves = True
 resto = n

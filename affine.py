@@ -19,6 +19,6 @@ def deciphersaffineCipher(n,ci,a,b):
     return alfabeto[posicion]
 
 
-#print(affineCipher(26,"f",5,8))
-print(deciphersaffineCipher(26,affineCipher(26,"s",0,0),0,0))
+print(affineCipher(26,"s",21,9))
+#print(deciphersaffineCipher(26,affineCipher(26,"s",5,8),5,8))
 

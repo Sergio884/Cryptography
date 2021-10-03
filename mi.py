@@ -1,5 +1,5 @@
-n = 26
-a = 3
+n = 22
+a = 11
 inverso = 0
 contador = 0
 while contador < n:
