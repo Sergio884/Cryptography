@@ -24,10 +24,10 @@ def decryption(ct,k,alphabet):
             cont += 1        
     return (pt.upper())
 
-pt = "pvto el que lo lea"
-k = (10,4,24)
+pt = "zyxw azyx bazy cbaz dcba"
+k = (1,2,3,4)
 
 print(encryption(pt,k,alphabet))
-print(decryption(encryption(pt,k,alphabet),k,alphabet))
+print(decryption( encryption(pt,k,alphabet) ,k,alphabet))
 
 
