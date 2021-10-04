@@ -1,11 +1,10 @@
-cadena = "1234567890"
+cadena = "abdddhaj"
 separadores = []
 
-newCadena = cadena
 if len(cadena)%3!=0:
-    newCadena += " "*(3-len(cadena)%3)
+    cadena += " "*(3-len(cadena)%3)
 
-for i in range(int(len(newCadena)/3)):    
-    separadores.append(newCadena[(i*3):((i+1)*3)])
+for i in range(int(len(cadena)/3)):    
+    separadores.append(cadena[(i*3):((i+1)*3)])
     
 print(separadores)
