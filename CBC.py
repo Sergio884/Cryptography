@@ -16,12 +16,11 @@ def dividirCadena(cadena,segmento):
     return separadores
 
 
-def xorAlfabeto(entrada,iv,alphabet):
+def xorF(entrada,iv,alphabet):
     cadena = ""
     for i in range(0,len(entrada)):
-        cadena += alphabet[(alphabet.index(entrada[i])^alphabet.index(iv[i]))]
+        cadena += alphabet[((ord(entrada[i])^ord(iv[i]))%len(alphabet))]
     return cadena
-
 
 def encryption(pt,k,alphabet):    
     ct = ""
@@ -34,7 +33,7 @@ def encryption(pt,k,alphabet):
 def cbc(pt,iv,segmento,k,alphabet):
     newPt = arreglarCadena(pt,alphabet)
     bloquesPt = dividirCadena(newPt,segmento)
-    xor = xorAlfabeto(bloquesPt[0],iv,alphabet)
+    xor = xorF(bloquesPt[0],iv,alphabet)
     vc = encryption(xor,k,alphabet)
 
     print(vc)
