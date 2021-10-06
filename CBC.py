@@ -1,15 +1,7 @@
-def arreglarCadena(cadena,alphabet):    
-    newCadena = ""
-    for i in cadena.lower():
-        if alphabet.count(i)==1:
-            newCadena+=i
-    return newCadena
-
-
 def dividirCadena(cadena,segmento):
     separadores = []
     if len(cadena)%segmento!=0:
-        cadena += "x"*(segmento-len(cadena)%segmento)
+        cadena += " "*(segmento-len(cadena)%segmento)
 
     for i in range(int(len(cadena)/segmento)):    
         separadores.append(cadena[(i*segmento):((i+1)*segmento)])        
@@ -31,9 +23,8 @@ def encryption(pt,k,alphabet):
     return (ct)
 
 def cbc(pt,iv,segmento,k,alphabet):
-    ct = ""
-    newPt = arreglarCadena(pt,alphabet)
-    bloquesPt = dividirCadena(newPt,segmento)
+    ct = ""    
+    bloquesPt = dividirCadena(pt,segmento)
 
     for i in range(len(bloquesPt)):
         xor = xorFuncion(bloquesPt[i],iv,alphabet)
