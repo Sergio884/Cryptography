@@ -65,7 +65,6 @@ alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q",
 read500 = open("500.txt","r")
 pt = read500.readline()
 read500.close()
-#iv = "iii"
 iv = "aaa"
 k = (1,1,1)
 
@@ -73,4 +72,9 @@ create500CT = open("500CT.txt","w")
 ct = cbcCifrado(pt,iv,len(iv),k,alphabet)
 create500CT.write(ct)
 create500CT.close()
-print(cbcDecifrado(ct,iv,len(iv),k,alphabet))
+
+getPt = cbcDecifrado(ct,iv,len(iv),k,alphabet)
+print(getPt)
+create500PT = open("500PT.txt","w")
+create500PT.write(getPt)
+create500PT.close()
