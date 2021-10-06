@@ -41,12 +41,16 @@ def cbc(pt,iv,segmento,k,alphabet):
         ct += vc
         iv = vc        
 
-    print(ct)
+    return ct
 
 alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
-pt = "e b*Z ddh aje fe"
+read500 = open("500.txt","r")
+pt = read500.readline()
+read500.close()
 iv = "bba"
 k = (1,2,3)
 
-
-cbc(pt,iv,3,k,alphabet)
+create500CT = open("500CT.txt","w")
+print(cbc(pt,iv,3,k,alphabet))
+create500CT.write(cbc(pt,iv,3,k,alphabet))
+create500CT.close()
