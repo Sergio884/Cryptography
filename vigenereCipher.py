@@ -24,8 +24,8 @@ def decryption(ct,k,alphabet):
             cont += 1        
     return (pt.upper())
 
-pt = "zyxw azyx bazy cbaz dcba"
-k = (1,2,3,4)
+pt = "Esta es una cadena de tres leones ambrientoz en buzka de sexo y vida en wichinton"
+k = (1,2,3)
 
 print(encryption(pt,k,alphabet))
 print(decryption( encryption(pt,k,alphabet) ,k,alphabet))
