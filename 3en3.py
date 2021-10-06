@@ -1,4 +1,4 @@
-cadena = "abdddhaj"
+cadena = "abdddhajefe"
 separadores = []
 
 if len(cadena)%3!=0:
