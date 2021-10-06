@@ -1,3 +1,4 @@
+''' Para eliminar simbolos o caracteres que no pertenecen al alfabeto '''
 def arreglarCadena(cadena,alphabet):    
     newCadena = ""
     for i in cadena.lower():
@@ -5,9 +6,11 @@ def arreglarCadena(cadena,alphabet):
             newCadena+=i            
     return newCadena
 
+'''Esta funcion sirve para dividir una cadena en segmentos de un tamanio determinado'''
 def dividirCadena(cadena,segmento):
     separadores = []
     if len(cadena)%segmento!=0:
+        '''Se concatena x al final en caso de que no se complete un segmento'''
         cadena += "x"*(segmento-len(cadena)%segmento)
 
     for i in range(int(len(cadena)/segmento)):    
@@ -21,7 +24,7 @@ def xorFuncion(entrada,iv,alphabet):
         cadena += alphabet[(alphabet.index(entrada[i])^alphabet.index(iv[i]))%len(alphabet)]
     return cadena
 
-def encryption(pt,k,alphabet):    
+def encryptionVigenere(pt,k,alphabet):    
     ct = ""
     cont = 0
     for c in pt:
@@ -29,7 +32,7 @@ def encryption(pt,k,alphabet):
         cont += 1        
     return (ct)
 
-def decryption(ct,k,alphabet):    
+def decryptionVigenere(ct,k,alphabet):    
     pt = ""
     cont = 0
     for c in ct:
@@ -44,7 +47,7 @@ def cbcCifrado(pt,iv,segmento,k,alphabet):
 
     for i in range(len(bloquesPt)):
         xor = xorFuncion(bloquesPt[i],iv,alphabet)
-        vc = encryption(xor,k,alphabet)
+        vc = encryptionVigenere(xor,k,alphabet)
         ct += vc
         iv = vc            
     return ct
@@ -54,14 +57,15 @@ def cbcDecifrado(ct,iv,segmento,k,alphabet):
     bloquesCt = dividirCadena(ct,segmento)    
 
     for i in range(len(bloquesCt)):        
-        vc = decryption(bloquesCt[i],k,alphabet)  
+        vc = decryptionVigenere(bloquesCt[i],k,alphabet)  
         xor = xorFuncion(vc,iv,alphabet)        
         pt += xor
         iv = bloquesCt[i]        
 
     return pt
 
-alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","1","2","3","4","5","6"]
+alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","{","<","¬","^",">","}"]
+
 read500 = open("500.txt","r")
 pt = read500.readline()
 read500.close()
