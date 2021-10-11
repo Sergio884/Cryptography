@@ -142,7 +142,7 @@ def cfbDecifrado(ct,iv,segmento,k,alphabet):
 
 
 #CTR
-def ctrCifrado(pt,counter,segmento,k,alphabet):
+def ctrCifrado(pt,counter,nonce,segmento,k,alphabet):
     ct = ""
     pt = arreglarCadena(pt,alphabet)    
     bloquesPt = dividirCadena(pt,segmento)        
@@ -154,6 +154,7 @@ def ctrCifrado(pt,counter,segmento,k,alphabet):
         a = int(counter, 2)
         counter = ""
         a+=1
+        a+=nonce
         codigo = bin(a)
         if len(codigo[2:])!=8:
             counter += "0"*(8-len(codigo[2:]))
@@ -161,7 +162,7 @@ def ctrCifrado(pt,counter,segmento,k,alphabet):
 
     return ct
 
-def ctrDecifrado(ct,counter,segmento,k,alphabet):
+def ctrDecifrado(ct,counter,nonce,segmento,k,alphabet):
     pt = ""        
     bloquesCt = dividirCadena(ct,segmento)        
 
@@ -172,6 +173,7 @@ def ctrDecifrado(ct,counter,segmento,k,alphabet):
         a = int(counter, 2)
         counter = ""
         a+=1
+        a+=nonce
         codigo = bin(a)
         if len(codigo[2:])!=8:
             counter += "0"*(8-len(codigo[2:]))
@@ -180,14 +182,15 @@ def ctrDecifrado(ct,counter,segmento,k,alphabet):
 
 def ctr(alphabet,pt):
     counter = "00000000"
+    nonce = 10
     k = (10,24,16,7,2,4,5,2)
 
     create500CT = open("500CT.txt","w")
-    ct = ctrCifrado(pt,counter,len(k),k,alphabet)
+    ct = ctrCifrado(pt,counter,nonce,len(k),k,alphabet)
     create500CT.write(ct)
     create500CT.close()
 
-    getPt = ctrDecifrado(ct,counter,len(k),k,alphabet)
+    getPt = ctrDecifrado(ct,counter,nonce,len(k),k,alphabet)
     print("CTR MODE")
     print(getPt)
     create500PT = open("500PT.txt","w")
@@ -232,6 +235,6 @@ read500 = open("500.txt","r")
 pt = read500.readline()
 read500.close()
 
-#ctr(alphabet,pt)
+ctr(alphabet,pt)
 #cbc(alphabet,pt)
 #cfb(alphabet,pt)
