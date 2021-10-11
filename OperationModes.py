@@ -1,5 +1,6 @@
 #Olivares Romero José Alejandro (Hizo CFB)
-#Valle Ortiz Edilberto Sergio (Hizo CBC y CTR)
+#Tovar Espejo M. Josefina (Hizo CTR)
+#Valle Ortiz Edilberto Sergio (Hizo CBC)
 
 ''' Para eliminar simbolos o caracteres que no pertenecen al alfabeto '''
 def arreglarCadena(cadena,alphabet):    
