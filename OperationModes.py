@@ -1,3 +1,6 @@
+#Olivares Romero José Alejandro (Hizo CFB)
+#Valle Ortiz Edilberto Sergio (Hizo CBC y CTR)
+
 ''' Para eliminar simbolos o caracteres que no pertenecen al alfabeto '''
 def arreglarCadena(cadena,alphabet):    
     newCadena = ""
@@ -190,8 +193,6 @@ def ctr(alphabet,pt):
     create500PT = open("500PT.txt","w")
     create500PT.write(getPt)
     create500PT.close()
-
-
 
 def cbc(alphabet,pt):
     iv = "01100001011000010110000101100010"
