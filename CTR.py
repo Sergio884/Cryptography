@@ -6,24 +6,6 @@ def arreglarCadena(cadena,alphabet):
             newCadena+=i            
     return newCadena
 
-def convertBits(iv):
-    iv+="s"
-    letra = ""
-    newIV=""
-    cont = 0
-    for l in iv:        
-        if cont < 8:
-            letra+=l
-        else:            
-            n = int(letra,2)            
-            newIV+=chr(n)
-            cont=0
-            letra=""
-        cont+=1
-    return newIV
-
-
-
 '''Esta funcion sirve para dividir una cadena en segmentos de un tamanio determinado'''
 def dividirCadena(cadena,segmento):
     separadores = []
@@ -58,46 +40,59 @@ def decryptionVigenere(ct,k,alphabet):
         cont += 1            
     return (pt)
 
-def cbcCifrado(pt,iv,segmento,k,alphabet):
+def ctrCifrado(pt,counter,segmento,k,alphabet):
     ct = ""
     pt = arreglarCadena(pt,alphabet)    
     bloquesPt = dividirCadena(pt,segmento)        
 
     for i in range(len(bloquesPt)):
-        xor = xorFuncion(bloquesPt[i],iv,alphabet)
-        vc = encryptionVigenere(xor,k,alphabet)
-        ct += vc
-        iv = vc            
+        vc = encryptionVigenere(counter,k,alphabet)
+        xor = xorFuncion(bloquesPt[i],vc,alphabet)
+        ct += xor                    
+        a = int(counter, 2)
+        counter = ""
+        a+=1
+        codigo = bin(a)
+        if len(codigo[2:])!=8:
+            counter += "0"*(8-len(codigo[2:]))
+        counter += codigo[2:]        
+
     return ct
 
-def cbcDecifrado(ct,iv,segmento,k,alphabet):
-    pt = ""    
-    bloquesCt = dividirCadena(ct,segmento)    
+def ctrDecifrado(ct,counter,segmento,k,alphabet):
+    pt = ""        
+    bloquesCt = dividirCadena(ct,segmento)        
 
-    for i in range(len(bloquesCt)):        
-        vc = decryptionVigenere(bloquesCt[i],k,alphabet)  
-        xor = xorFuncion(vc,iv,alphabet)        
-        pt += xor
-        iv = bloquesCt[i]        
-
+    for i in range(len(bloquesCt)):
+        vc = encryptionVigenere(counter,k,alphabet)
+        xor = xorFuncion(bloquesCt[i],vc,alphabet)
+        pt += xor                    
+        a = int(counter, 2)
+        counter = ""
+        a+=1
+        codigo = bin(a)
+        if len(codigo[2:])!=8:
+            counter += "0"*(8-len(codigo[2:]))
+        counter += codigo[2:]        
     return pt
-
 
 alphabet = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","0","1","{","<",">","}"]
 
 read500 = open("500.txt","r")
 pt = read500.readline()
 read500.close()
-iv = "01100001011000010110000101100010"
-k = (10,24,16,2)
+counter = "00000000"
+k = (10,24,16,7,2,4,5,2)
 
 create500CT = open("500CT.txt","w")
-ct = cbcCifrado(pt,convertBits(iv),len(k),k,alphabet)
+ct = ctrCifrado(pt,counter,len(k),k,alphabet)
 create500CT.write(ct)
 create500CT.close()
 
-getPt = cbcDecifrado(ct,convertBits(iv),len(k),k,alphabet)
+getPt = ctrDecifrado(ct,counter,len(k),k,alphabet)
 print(getPt)
 create500PT = open("500PT.txt","w")
 create500PT.write(getPt)
 create500PT.close()
+
+
