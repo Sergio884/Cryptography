@@ -235,6 +235,6 @@ read500 = open("500.txt","r")
 pt = read500.readline()
 read500.close()
 
-ctr(alphabet,pt)
-#cbc(alphabet,pt)
+#ctr(alphabet,pt)
+cbc(alphabet,pt)
 #cfb(alphabet,pt)
